@@ -80,7 +80,7 @@ class _$WordDatabase extends WordDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `WordDetails` (`id` TEXT, `headWord` TEXT, `pronunciation` TEXT, `spillingAdvice` TEXT, `partOfSpeech` TEXT, `definition` TEXT, `wordBuilding` TEXT, `extraInformation` TEXT, `sup` TEXT, `endingOfWordChanged` TEXT, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `WordDetails` (`id` INTEGER, `headWord` TEXT, `pronunciation` TEXT, `spillingAdvice` TEXT, `partOfSpeech` TEXT, `definition` TEXT, `wordBuilding` TEXT, `extraInformation` TEXT, `sup` TEXT, `endingOfWordChanged` TEXT, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE INDEX `index_WordDetails_headWord` ON `WordDetails` (`headWord`)');
 
@@ -106,7 +106,7 @@ class _$WordDao extends WordDao {
   final QueryAdapter _queryAdapter;
 
   static final _wordDetailsMapper = (Map<String, dynamic> row) => WordDetails(
-      row['id'] as String,
+      row['id'] as int,
       row['headWord'] as String,
       row['pronunciation'] as String,
       row['spillingAdvice'] as String,

@@ -47,6 +47,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget>{
             padding: EdgeInsets.all(5),
             color: Colors.white70,
             child: TextField(
+              autofocus: true,
               controller: textEditingController,
               style: TextStyle(
                 color: Colors.pink,

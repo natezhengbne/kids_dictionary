@@ -16,7 +16,11 @@ import 'package:redux/redux.dart';
 class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return WillPopScope(
+      onWillPop: ()async{
+        ReduxService.dispatch(SearchOnResultAction([]));
+        return true;
+      },
       child: Scaffold(
         appBar: AppBar(
           titleSpacing: 0,
@@ -53,18 +57,16 @@ class SearchResult extends StatelessWidget {
       converter: (Store<StateController> store) => store.state.searchState,
       builder: (ctx, searchState){
         List<WordDetails> list = searchState.wordDetailsList;
-        if(list==null || list.length == 0){
-          return Container();
-        }
-        return SingleChildScrollView(
-          child: ListView(
-            children: List.generate(list.length, (idx){
-              WordDetails wordDetails = list[idx];
-              return Container(
-                child: WordWidget(wordDetails),
-              );
-            }),
-          ),
+        return ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          itemCount: list?.length??0,
+          itemBuilder: (context, index){
+            WordDetails wordDetails = list[index];
+            return Container(
+              child: WordWidget(wordDetails),
+            );
+          },
         );
       },
     );

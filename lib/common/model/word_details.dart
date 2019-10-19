@@ -4,7 +4,7 @@ import 'package:floor/floor.dart';
 @Entity(tableName: 'WordDetails', indices: [Index(value: ['headWord'])])
 class WordDetails  {
   @primaryKey
-  final String id;
+  final int id;
   final String headWord;
   final String pronunciation;
   final String spillingAdvice;
