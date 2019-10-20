@@ -3,8 +3,11 @@ import 'package:kids_dictionary/common/model/word_details.dart';
 
 @dao
 abstract class WordDao{
-  @Query('SELECT * FROM WordDetails')
-  Future<List<WordDetails>> findAllWords();
+  @Query('SELECT id, headWord FROM WordDetails')
+  Future<List<WordDetails>> getAllHeadWords();
+
+  @Query('SELECT * FROM WordDetails where id in (:ids)')
+  Future<List<WordDetails>> getWordsByIds(List<int> ids);
 
   ///Query arguments, when using SQLite's LIKE operator,
   ///have to be supplied by the input of a method.

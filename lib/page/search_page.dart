@@ -44,13 +44,15 @@ class SearchPage extends StatelessWidget {
             ),
           ],
         ),
-        body: SearchResult(),
+        body: const SearchResult(),
       ),
     );
   }
 }
 
 class SearchResult extends StatelessWidget {
+  const SearchResult();
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<StateController, SearchState>(

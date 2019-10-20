@@ -8,6 +8,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DbService{
   static WordDatabase wordDatabase ;
+  static List<WordDetails> headWordList ;
 
   static Future init()async{
     if(wordDatabase!=null){
@@ -23,7 +24,7 @@ class DbService{
     await dbFile.writeAsBytes(bytes);
 
     wordDatabase = await $FloorWordDatabase.databaseBuilder('word_database.db').build();
-//    List<WordDetails> result = await database.wordDao.findAllWords();
+    headWordList = await wordDatabase.wordDao.getAllHeadWords();
 
   }
 }

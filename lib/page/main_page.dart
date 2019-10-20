@@ -1,9 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kids_dictionary/common/service/db_service.dart';
 import 'package:kids_dictionary/page/home_page.dart';
 import 'package:kids_dictionary/page/search_page.dart';
 import 'package:kids_dictionary/page/word_list_page.dart';
@@ -13,9 +10,12 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin{
   final PageController _pageController = PageController();
   int currentPageIdx = 0;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -30,6 +30,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
@@ -68,8 +69,8 @@ class _MainPageState extends State<MainPage> {
       physics: NeverScrollableScrollPhysics(),
       controller: _pageController,
       children: <Widget>[
-        HomePage(),
-        WordListPage(),
+        const HomePage(),
+        const WordListPage(),
       ],
     );
   }

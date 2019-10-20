@@ -118,8 +118,16 @@ class _$WordDao extends WordDao {
       row['endingOfWordChanged'] as String);
 
   @override
-  Future<List<WordDetails>> findAllWords() async {
-    return _queryAdapter.queryList('SELECT * FROM WordDetails',
+  Future<List<WordDetails>> getAllHeadWords() async {
+    return _queryAdapter.queryList('SELECT id, headWord FROM WordDetails',
+        mapper: _wordDetailsMapper);
+  }
+
+  @override
+  Future<List<WordDetails>> getWordsByIds(List<int> ids) async {
+    final valueList1 = ids.map((value) => "'$value'").join(', ');
+    return _queryAdapter.queryList(
+        'SELECT * FROM WordDetails where id in ($valueList1)',
         mapper: _wordDetailsMapper);
   }
 
