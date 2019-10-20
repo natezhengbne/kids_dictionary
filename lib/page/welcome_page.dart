@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kids_dictionary/common/service/db_service.dart';
 import 'package:kids_dictionary/page/main_page.dart';
 import 'package:simple_animations/simple_animations/controlled_animation.dart';
 
@@ -30,9 +31,9 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
           tween: Tween(begin: 2.0, end: 300.0),
           animationControllerStatusListener: (status){
             if (status == AnimationStatus.completed) {
-              Timer(Duration(milliseconds: 1200),
+              DbService.init().then((_)=>Timer(Duration(milliseconds: 1200),
                       ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()),)
-              );
+              ));
             }
           },
           builder: (context, width) {

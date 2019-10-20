@@ -31,19 +31,22 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     return FutureBuilder<List<WordDetails>>(
       future: wordDetailsList,
       builder: (BuildContext context, AsyncSnapshot<List<WordDetails>> snapshot){
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            return Container();
-          case ConnectionState.active:
-          case ConnectionState.waiting:
-            return Container();
-          case ConnectionState.done:
-            List<WordDetails> list = snapshot.data;
-
-            print("------> HomePage 2");
-            return Container();
+        if(snapshot.connectionState!=ConnectionState.done || snapshot.data == null){
+          return Container();
         }
-        return Container(); // unreachable
+        List<WordDetails> list = snapshot.data;
+        return ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          itemCount: list?.length??0,
+          itemBuilder: (context, index){
+            WordDetails wordDetails = list[index];
+            return Container(
+              child: WordWidget(wordDetails),
+            );
+          },
+        );
+
       },
     );
   }

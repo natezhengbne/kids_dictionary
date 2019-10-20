@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kids_dictionary/page/home_page.dart';
 import 'package:kids_dictionary/page/search_page.dart';
 import 'package:kids_dictionary/page/word_list_page.dart';
@@ -45,7 +46,7 @@ class _MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin{
     return AppBar(
       leading: Icon(Icons.search),
       centerTitle: false,
-      titleSpacing: 1,
+      titleSpacing: 0,
       title: GestureDetector(
         onTap: (){
           Navigator.push(
@@ -55,12 +56,20 @@ class _MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin{
         },
         child:  Container(
           margin: EdgeInsets.all(10),
+          width: ScreenUtil.screenWidth*0.4,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
+          child: Text("Search Here"),
         ),
       ),
+      actions: <Widget>[
+        Container(
+          margin: EdgeInsets.only(right: 15),
+          child: Icon(Icons.face),
+        ),
+      ],
     );
   }
 
