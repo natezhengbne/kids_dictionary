@@ -9,12 +9,15 @@ class WordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(ScreenUtil().setWidth(15)),
+      padding: EdgeInsets.all(ScreenUtil().setWidth(15)),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        color: Colors.grey[200],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           headWord(),
           partOfSpeech(),
@@ -31,9 +34,10 @@ class WordWidget extends StatelessWidget {
   Widget headWord(){
     return Container(
       child: Text(wordDetails.headWord,
+        textAlign: TextAlign.left,
         style: TextStyle(
-          color: Colors.red,
-          fontSize: ScreenUtil().setSp(32),
+          color: Colors.pinkAccent,
+          fontSize: ScreenUtil().setSp(60),
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -41,56 +45,88 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget definition(){
-    if(wordDetails?.definition==null){
-      return Container();
-    }
+//    if(wordDetails?.definition==null){
+//      return Container();
+//    }
     return Container(
-      child: Text(wordDetails?.definition??"",
+      child: Text(wordDetails?.definition??"If so1mething is broad, it is very wide. the river is so broad.If something is broad, it is very wide. the river is so broad",
         style: TextStyle(
           color: Colors.black,
-          fontSize: ScreenUtil().setSp(20),
+          fontSize: ScreenUtil().setSp(30),
         ),
       ),
     );
   }
 
   Widget extraInformation(){
-    if(wordDetails?.extraInformation==null){
-      return Container();
-    }
+//    if(wordDetails?.extraInformation==null){
+//      return Container();
+//    }
     return Container(
-      child: Text(wordDetails?.extraInformation??"",
+      child: Text(wordDetails?.extraInformation??"This world comes from an Aboriginal language of New south wales called kamilaroi",
         style: TextStyle(
           color: Colors.black,
-          fontSize: ScreenUtil().setSp(20),
+          fontSize: ScreenUtil().setSp(30),
         ),
       ),
     );
   }
 
   Widget wordBuilding(){
-    if(wordDetails?.wordBuilding==null){
-      return Container();
-    }
+//    if(wordDetails?.wordBuilding==null){
+//      return Container();
+//    }
     return Container(
-      child: Text(wordDetails?.wordBuilding??"",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: ScreenUtil().setSp(20),
+      child: Text.rich(
+        TextSpan(
+          text: "Word Budiling: ",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: ScreenUtil().setSp(30),
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.w600,
+          ),
+          children: [
+            TextSpan(
+              text: wordDetails?.wordBuilding??"broaden, verb if you make something more broad, you broaden it. - ",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: ScreenUtil().setSp(30),
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget spellingAdvice(){
-    if(wordDetails?.spillingAdvice==null){
-      return Container();
-    }
+//    if(wordDetails?.spillingAdvice==null){
+//      return Container();
+//    }
     return Container(
-      child: Text(wordDetails?.spillingAdvice??"",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: ScreenUtil().setSp(20),
+      child: Text.rich(
+        TextSpan(
+          text: "Spelling Tip: ",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: ScreenUtil().setSp(30),
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.w600,
+          ),
+          children: [
+            TextSpan(
+              text: wordDetails?.spillingAdvice??"Remember  the oa spelling for the aw sound",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: ScreenUtil().setSp(30),
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -101,10 +137,11 @@ class WordWidget extends StatelessWidget {
       return Container();
     }
     return Container(
+//      alignment: Alignment.centerLeft,
       child: Text(wordDetails?.pronunciation??"",
         style: TextStyle(
           color: Colors.black,
-          fontSize: ScreenUtil().setSp(20),
+          fontSize: ScreenUtil().setSp(30),
         ),
       ),
     );
@@ -112,10 +149,11 @@ class WordWidget extends StatelessWidget {
 
   Widget partOfSpeech(){
     return Container(
-      child: Text(wordDetails?.partOfSpeech??"",
+      child: Text(wordDetails?.partOfSpeech??"adjective",
         style: TextStyle(
           color: Colors.black,
-          fontSize: ScreenUtil().setSp(20),
+          fontSize: ScreenUtil().setSp(30),
+          fontStyle: FontStyle.italic
         ),
       ),
     );
