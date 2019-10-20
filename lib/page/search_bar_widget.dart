@@ -15,6 +15,7 @@ class SearchBarWidget extends StatefulWidget {
 class _SearchBarWidgetState extends State<SearchBarWidget>{
   Timer inputTimer;
   TextEditingController textEditingController;
+  bool isDisplayClearButton = false;
 
   @override
   void initState() {
@@ -31,43 +32,52 @@ class _SearchBarWidgetState extends State<SearchBarWidget>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Stack(
-        alignment: AlignmentDirectional.centerEnd,
+      child: Row(
+//        alignment: AlignmentDirectional.centerEnd,
         children: <Widget>[
-          GestureDetector(
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(5),
+//            color: Colors.white70,
+              child: TextField(
+                autofocus: true,
+                controller: textEditingController,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: ScreenUtil().setSp(32),
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Search here",
+                  hintStyle: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                onChanged: (value){
+                  if(value.length>0){
+                    _goSearch(value);
+                  }else{
+                    setState(() {
+                      isDisplayClearButton = false;
+                    });
+                  }
+                },
+              ),
+            ),
+          ),
+          isDisplayClearButton?GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: (){
               textEditingController.clear();
+              setState(() {
+                isDisplayClearButton = false;
+              });
             },
             child: Container(
-              margin: EdgeInsets.all(5),
+//              padding: EdgeInsets.all(10),
               child: Icon(Icons.cancel),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.all(5),
-            color: Colors.white70,
-            child: TextField(
-              autofocus: true,
-              controller: textEditingController,
-              style: TextStyle(
-                color: Colors.pink,
-                fontSize: ScreenUtil().setSp(32),
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Search here",
-                hintStyle: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              onChanged: (value){
-                if(value.length>0){
-                  _goSearch(value);
-                }
-              },
-            ),
-          ),
-
+          ):Container(),
         ],
       ),
     );
@@ -78,5 +88,10 @@ class _SearchBarWidgetState extends State<SearchBarWidget>{
     inputTimer = Timer(Duration(milliseconds: 220),
             ()=>widget.goSearch(inputValue)
     );
+    if(!isDisplayClearButton){
+      setState(() {
+        isDisplayClearButton = true;
+      });
+    }
   }
 }

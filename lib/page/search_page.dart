@@ -29,7 +29,7 @@ class SearchPage extends StatelessWidget {
 //          ),
           title: SearchBarWidget(
             goSearch: (value) async{
-              List<WordDetails> result = await DbService?.wordDatabase?.wordDao?.findWords("$value%")??[];
+              List<WordDetails> result = await DbService?.wordDatabase?.wordDao?.findWords("$value%",20)??[];
               if(result!=null && result.length>0){
                 ReduxService.dispatch(SearchOnResultAction(result));
               }
@@ -38,9 +38,6 @@ class SearchPage extends StatelessWidget {
           actions: <Widget>[
             Container(
               margin: EdgeInsets.all(5),
-              child: Center(
-                child: Text("Cancel"),
-              ),
             ),
           ],
         ),

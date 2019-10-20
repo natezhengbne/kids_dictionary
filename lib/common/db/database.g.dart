@@ -132,10 +132,10 @@ class _$WordDao extends WordDao {
   }
 
   @override
-  Future<List<WordDetails>> findWords(String fuzzy) async {
+  Future<List<WordDetails>> findWords(String fuzzy, int limitSize) async {
     return _queryAdapter.queryList(
-        'SELECT * FROM WordDetails where headWord like ?',
-        arguments: <dynamic>[fuzzy],
+        'SELECT * FROM WordDetails where headWord like ? LIMIT ?',
+        arguments: <dynamic>[fuzzy, limitSize],
         mapper: _wordDetailsMapper);
   }
 }

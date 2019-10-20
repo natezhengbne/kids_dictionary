@@ -45,9 +45,9 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget definition(){
-//    if(wordDetails?.definition==null){
-//      return Container();
-//    }
+    if(wordDetails?.definition==null){
+      return Container();
+    }
     return Container(
       child: Text(wordDetails?.definition??"If so1mething is broad, it is very wide. the river is so broad.If something is broad, it is very wide. the river is so broad",
         style: TextStyle(
@@ -59,9 +59,9 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget extraInformation(){
-//    if(wordDetails?.extraInformation==null){
-//      return Container();
-//    }
+    if(wordDetails?.extraInformation==null){
+      return Container();
+    }
     return Container(
       child: Text(wordDetails?.extraInformation??"This world comes from an Aboriginal language of New south wales called kamilaroi",
         style: TextStyle(
@@ -73,9 +73,9 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget wordBuilding(){
-//    if(wordDetails?.wordBuilding==null){
-//      return Container();
-//    }
+    if(wordDetails?.wordBuilding==null){
+      return Container();
+    }
     return Container(
       child: Text.rich(
         TextSpan(
@@ -103,9 +103,9 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget spellingAdvice(){
-//    if(wordDetails?.spillingAdvice==null){
-//      return Container();
-//    }
+    if(wordDetails?.spillingAdvice==null){
+      return Container();
+    }
     return Container(
       child: Text.rich(
         TextSpan(
