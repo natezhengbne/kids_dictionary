@@ -99,13 +99,13 @@ class _MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin{
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.ac_unit),
-          activeIcon: Icon(Icons.radio),
-          title: Text("hi"),
+          activeIcon: Icon(Icons.face),
+          title: Text("Lucky"),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.store),
-          activeIcon: Icon(Icons.android),
-          title: Text("h1i"),
+          activeIcon: Icon(Icons.view_list),
+          title: Text("Words"),
         ),
       ],
     );

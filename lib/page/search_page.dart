@@ -63,7 +63,10 @@ class SearchResult extends StatelessWidget {
           itemBuilder: (context, index){
             WordDetails wordDetails = list[index];
             return Container(
-              child: WordWidget(wordDetails),
+              child: GestureDetector(
+                onTap: ()=>FocusScope.of(context).unfocus(),
+                child: WordWidget(wordDetails),
+              ),
             );
           },
         );
