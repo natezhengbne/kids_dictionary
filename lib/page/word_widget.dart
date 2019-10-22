@@ -8,6 +8,46 @@ class WordWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> list = [];
+    list.add(headWord());
+    if((wordDetails?.partOfSpeech?.length??0) > 0){
+      list.add(Padding(
+        padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+        child: partOfSpeech(),
+      ));
+    }
+    if((wordDetails?.pronunciation?.length??0) >0){
+      list.add(Padding(
+        padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+        child: pronunciation(),
+      ));
+    }
+    if((wordDetails?.definition?.length ??0) > 0){
+      list.add(Padding(
+        padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+        child: definition(),
+      ));
+    }
+    if((wordDetails?.wordBuilding?.length ??0) > 0){
+      list.add(Padding(
+        padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+        child: wordBuilding(),
+      ));
+    }
+    if((wordDetails?.extraInformation?.length ??0) > 0){
+      list.add(Padding(
+        padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+        child: extraInformation(),
+      ));
+    }
+    if((wordDetails?.spillingAdvice?.length ??0) > 0){
+      list.add(Padding(
+        padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+        child: spellingAdvice(),
+      ));
+    }
+
+
     return Container(
       margin: EdgeInsets.all(ScreenUtil().setWidth(15)),
       padding: EdgeInsets.all(ScreenUtil().setWidth(15)),
@@ -18,15 +58,7 @@ class WordWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          headWord(),
-          partOfSpeech(),
-          pronunciation(),
-          definition(),
-          wordBuilding(),
-          extraInformation(),
-          spellingAdvice(),
-        ],
+        children: list,
       ),
     );
   }
@@ -45,11 +77,38 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget definition(){
-    if(wordDetails?.definition==null){
-      return Container();
+    if(wordDetails.definition.contains("#-")){
+      List<String> multiDefinitions = wordDetails.definition.split("#-");
+      return Padding(
+        padding: EdgeInsets.only(top: ScreenUtil().setHeight(8), bottom: ScreenUtil().setHeight(8)),
+        child: Column(
+          children: List.generate(multiDefinitions.length, (index){
+            return Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(right: ScreenUtil().setWidth(8)),
+                    child: Text("${index+1}.",
+                      softWrap: true,
+                      style: TextStyle(
+                          color: Colors.pink
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(multiDefinitions[index]),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ),
+      );
     }
     return Container(
-      child: Text(wordDetails?.definition??"If so1mething is broad, it is very wide. the river is so broad.If something is broad, it is very wide. the river is so broad",
+      padding: EdgeInsets.only(top: ScreenUtil().setHeight(8), bottom: ScreenUtil().setHeight(8)),
+      child: Text(wordDetails?.definition,
         style: TextStyle(
           color: Colors.black,
           fontSize: ScreenUtil().setSp(30),
@@ -59,11 +118,8 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget extraInformation(){
-    if(wordDetails?.extraInformation==null){
-      return Container();
-    }
     return Container(
-      child: Text(wordDetails?.extraInformation??"This world comes from an Aboriginal language of New south wales called kamilaroi",
+      child: Text(wordDetails?.extraInformation,
         style: TextStyle(
           color: Colors.black,
           fontSize: ScreenUtil().setSp(30),
@@ -73,9 +129,7 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget wordBuilding(){
-    if(wordDetails?.wordBuilding==null){
-      return Container();
-    }
+
     return Container(
       child: Text.rich(
         TextSpan(
@@ -88,7 +142,7 @@ class WordWidget extends StatelessWidget {
           ),
           children: [
             TextSpan(
-              text: wordDetails?.wordBuilding??"broaden, verb if you make something more broad, you broaden it. - ",
+              text: wordDetails?.wordBuilding??"^",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: ScreenUtil().setSp(30),
@@ -103,9 +157,7 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget spellingAdvice(){
-    if(wordDetails?.spillingAdvice==null){
-      return Container();
-    }
+
     return Container(
       child: Text.rich(
         TextSpan(
@@ -118,7 +170,7 @@ class WordWidget extends StatelessWidget {
           ),
           children: [
             TextSpan(
-              text: wordDetails?.spillingAdvice??"Remember  the oa spelling for the aw sound",
+              text: wordDetails?.spillingAdvice,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: ScreenUtil().setSp(30),
@@ -133,12 +185,10 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget pronunciation(){
-    if(wordDetails?.pronunciation==null){
-      return Container();
-    }
+
     return Container(
 //      alignment: Alignment.centerLeft,
-      child: Text(wordDetails?.pronunciation??"",
+      child: Text(wordDetails?.pronunciation,
         style: TextStyle(
           color: Colors.black,
           fontSize: ScreenUtil().setSp(30),
@@ -149,7 +199,7 @@ class WordWidget extends StatelessWidget {
 
   Widget partOfSpeech(){
     return Container(
-      child: Text(wordDetails?.partOfSpeech??"adjective",
+      child: Text(wordDetails?.partOfSpeech,
         style: TextStyle(
           color: Colors.black,
           fontSize: ScreenUtil().setSp(30),
