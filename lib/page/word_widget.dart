@@ -10,12 +10,12 @@ class WordWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> list = [];
     list.add(headWord());
-    if((wordDetails?.partOfSpeech?.length??0) > 0){
-      list.add(Padding(
-        padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
-        child: partOfSpeech(),
-      ));
-    }
+//    if((wordDetails?.partOfSpeech?.length??0) > 0){
+//      list.add(Padding(
+//        padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+//        child: partOfSpeech(),
+//      ));
+//    }
     if((wordDetails?.pronunciation?.length??0) >0){
       list.add(Padding(
         padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
@@ -64,16 +64,46 @@ class WordWidget extends StatelessWidget {
   }
 
   Widget headWord(){
-    return Container(
-      child: Text(wordDetails.headWord,
-        textAlign: TextAlign.left,
+    return Text.rich(
+      TextSpan(
+        text: wordDetails.headWord,
         style: TextStyle(
           color: Colors.pinkAccent,
           fontSize: ScreenUtil().setSp(60),
           fontWeight: FontWeight.w600,
         ),
+        children: [
+          TextSpan(
+            text: "  ${wordDetails?.partOfSpeech??""}",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: ScreenUtil().setSp(30),
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
       ),
     );
+//    return Row(
+//      crossAxisAlignment: CrossAxisAlignment.end,
+//      children: <Widget>[
+//        Container(
+//          child: Text(wordDetails.headWord,
+//            textAlign: TextAlign.left,
+//            style: TextStyle(
+//              color: Colors.pinkAccent,
+//              fontSize: ScreenUtil().setSp(60),
+//              fontWeight: FontWeight.w600,
+//            ),
+//          ),
+//        ),
+//        Padding(
+//          padding: EdgeInsets.only(left: ScreenUtil().setWidth(12)),
+//          child: partOfSpeech(),
+//        )
+//      ],
+//    );
   }
 
   Widget definition(){
@@ -197,17 +227,17 @@ class WordWidget extends StatelessWidget {
     );
   }
 
-  Widget partOfSpeech(){
-    return Container(
-      child: Text(wordDetails?.partOfSpeech,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: ScreenUtil().setSp(30),
-          fontStyle: FontStyle.italic
-        ),
-      ),
-    );
-  }
+//  Widget partOfSpeech(){
+//    return Container(
+//      child: Text(wordDetails?.partOfSpeech??"",
+//        style: TextStyle(
+//          color: Colors.black,
+//          fontSize: ScreenUtil().setSp(30),
+//          fontStyle: FontStyle.italic
+//        ),
+//      ),
+//    );
+//  }
 
   // inside
 

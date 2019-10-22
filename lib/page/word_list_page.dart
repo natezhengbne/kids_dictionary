@@ -14,8 +14,7 @@ class WordListPage extends StatelessWidget{
         strList: DbService.headWordStrList,
         showPreview: true,
         highlightTextStyle: TextStyle(
-          backgroundColor: Colors.pink,
-          color: Colors.white,
+          color: Colors.pink,
           fontSize: ScreenUtil().setSp(36),
           fontWeight: FontWeight.w600,
         ),
